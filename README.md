@@ -13,7 +13,7 @@ The hotpatching strategy used in linux x64 is as follows:
 
 * Then page containing the target function can be achieved by multiplying the offset with the page number.
 
-* On x64 the page is typically 4K, thus allthe target functions should be organznized such as if all target function are in one page.
+* On x64 the page is typically 4K, thus all the target functions should be organized as if all target function are in one page.
 
 
 
