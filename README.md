@@ -16,5 +16,5 @@ The hotpatching strategy used in linux x64 is as follows:
 * On x64 the page is typically 4K, thus all the target functions should be organized as if all target function are in one page.
 
 
-
+* We used a thread-based shared memory model to execute our hotpatch our program.
 
