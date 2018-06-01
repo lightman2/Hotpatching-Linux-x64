@@ -11,7 +11,7 @@ The hotpatching strategy used in linux x64 is as follows:
 
 * Select the appropriate active page which constains the function, this can be done by making all the functions to be aligned by a fixed offset say 8 bytes/16 bytes. 
 
-* Then page containing the target function can be achieved by multiplying the offset with the page number.
+* Then page containing the target function can be achieved by performing logical AND of the target function & complement of 0xffff.
 
 * On x64 the page is typically 4K, thus all the target functions should be organized as if all target function are in one page.
 
