@@ -17,3 +17,5 @@ The hotpatching strategy used in linux x64 is as follows:
 
 * We used a thread-based shared memory model to execute our hotpatch our program.
 
+* Make sure that the function is 8 byte aligned before replacing the function with new function.
+
