@@ -25,3 +25,7 @@ The hotpatching strategy used in linux x64 is as follows:
 * You don’t need to recompile the library’s source code.
 * Hooking & hotpatching are closely reated to each other, but in GCC 8.0 the malloc hookig is disabled.
 
+## Demonstration of Code ##
+
+This is a simple program to show hotpatching.
+
