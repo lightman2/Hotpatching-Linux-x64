@@ -20,13 +20,51 @@ __attribute__ ((aligned(8)))
 __attribute__ ((noinline))
 __attribute__ ((noclone))
 
-static int x;
 void new_hello(void)
 {
-    printf("Hotpatched!, Updation of function on the run. %d\n",x);
+/*    static int x;*/
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	printf("Hotpatched!, Updation of function on the run. \n");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+	__asm__ __volatile__("nop");
+/*    printf("Hotpatched!, Updation of function on the run. %d\n",x++);*/
+/*    printf("Hotpatched!, Updation of function on the run. %d\n",x++);*/
+/*    printf("Hotpatched!, Updation of function on the run. %d\n",x++);*/
+/*    isbigendian();*/
+/*    x++;*/
+
 /*    int *a ;*/
 /*    *a = 100;*/
-	fflush(stdout);
+/*    fflush(stdout);*/
 }
 
 int isbigendian()
@@ -60,7 +98,7 @@ void hotpatch(void *target, void *replacement)
     assert(((uintptr_t)target & 0x07) == 0); // 8-byte aligned?
     void *page = (void *)((uintptr_t)target & ~0xfff);
     mprotect(page, 4096, PROT_WRITE | PROT_EXEC);
-    uint32_t rel = ((char *)replacement - (char *)target )/4-1;//减你妹- 4;
+    uint32_t rel = ((uint32_t )replacement - (uint32_t)target )/4-2;//减你妹- 4;
 	printf("tar = 0x%0x, rep = 0x%0x rel = 0x%0x\n", *(int*)target, *(int*)replacement, rel);
 /*    union {*/
 /*        uint8_t bytes[8];*/
@@ -92,7 +130,9 @@ void *worker(void *arg)
 		printf("%s %d\n", __func__, __LINE__);
         hello();
 		fflush(stdout);
+		printf("%s %d\n", __func__, __LINE__);
         usleep(100000);
+		printf("%s %d\n", __func__, __LINE__);
     }
     return NULL;
 }
@@ -113,6 +153,7 @@ int main(void)
     hotpatch(hello, new_hello);
     printf("%x   ; %x\n", *(int*)hello , *(int*)new_hello);
 
+	sleep(10);
 	sleep(10);
 	pthread_join(thread, NULL);
     return 0;
